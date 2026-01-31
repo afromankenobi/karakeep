@@ -1,10 +1,11 @@
 #!/usr/bin/env node
-import chalk from "chalk";
 import * as path from "path";
 import * as readline from "readline/promises";
+import chalk from "chalk";
 
 import { langNameMappings } from "@karakeep/shared/langs";
 
+import type { TranslationObject } from "./translationUtils";
 import { config } from "./config";
 import { TranslationService } from "./translationService";
 import {
@@ -14,7 +15,6 @@ import {
   loadTranslationFile,
   saveTranslationFile,
   setNestedValue,
-  type TranslationObject,
 } from "./translationUtils";
 
 const rl = readline.createInterface({
@@ -96,11 +96,7 @@ async function main() {
   const missingByLanguage = new Map<string, string[]>();
 
   for (const lang of selectedLanguages) {
-    const targetFile = path.join(
-      translationsBaseDir,
-      lang,
-      "translation.json",
-    );
+    const targetFile = path.join(translationsBaseDir, lang, "translation.json");
     const targetTranslations = await loadTranslationFile(targetFile);
     const targetKeys = getAllKeys(targetTranslations);
     const missing = getMissingKeys(sourceKeys, targetKeys);
@@ -120,7 +116,9 @@ async function main() {
   }
 
   if (missingByLanguage.size === 0) {
-    console.log(chalk.green("\n✓ All languages are complete! Nothing to do.\n"));
+    console.log(
+      chalk.green("\n✓ All languages are complete! Nothing to do.\n"),
+    );
     rl.close();
     return;
   }
@@ -140,7 +138,9 @@ async function main() {
 
   // Initialize translation service
   console.log(
-    chalk.blue(`\n🤖 Initializing AI translation service (${config.OPENAI_MODEL})...\n`),
+    chalk.blue(
+      `\n🤖 Initializing AI translation service (${config.OPENAI_MODEL})...\n`,
+    ),
   );
   const translationService = new TranslationService();
 
@@ -148,14 +148,12 @@ async function main() {
   for (const [lang, missingKeys] of missingByLanguage.entries()) {
     const langName = langNameMappings[lang] || lang;
     console.log(
-      chalk.cyan(`\n📝 Translating ${missingKeys.length} keys to ${langName}...`),
+      chalk.cyan(
+        `\n📝 Translating ${missingKeys.length} keys to ${langName}...`,
+      ),
     );
 
-    const targetFile = path.join(
-      translationsBaseDir,
-      lang,
-      "translation.json",
-    );
+    const targetFile = path.join(translationsBaseDir, lang, "translation.json");
     const targetTranslations = await loadTranslationFile(targetFile);
 
     // Prepare texts for batch translation

@@ -27,11 +27,7 @@ export function getAllKeys(
   for (const [key, value] of Object.entries(obj)) {
     const fullKey = prefix ? `${prefix}.${key}` : key;
 
-    if (
-      typeof value === "object" &&
-      value !== null &&
-      !Array.isArray(value)
-    ) {
+    if (typeof value === "object" && value !== null && !Array.isArray(value)) {
       const nestedKeys = getAllKeys(value as TranslationObject, fullKey);
       nestedKeys.forEach((v, k) => keys.set(k, v));
     } else {

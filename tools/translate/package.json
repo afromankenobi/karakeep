@@ -8,6 +8,7 @@
   "scripts": {
     "build": "tsc && chmod +x dist/index.js",
     "run": "tsx --env-file=./.env src/index.ts",
+    "test": "tsx src/test.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
