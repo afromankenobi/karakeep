@@ -61,15 +61,34 @@ export function setNestedValue(
   const keys = keyPath.split(".");
   let current: any = obj;
 
+  // Guard against prototype pollution
+  const dangerousKeys = ["__proto__", "constructor", "prototype"];
+
   for (let i = 0; i < keys.length - 1; i++) {
     const key = keys[i]!;
-    if (!(key in current)) {
+
+    // Prevent prototype pollution
+    if (dangerousKeys.includes(key)) {
+      throw new Error(
+        `Cannot set nested value: key "${key}" is not allowed for security reasons`,
+      );
+    }
+
+    if (!(key in current) || typeof current[key] !== "object") {
       current[key] = {};
     }
     current = current[key];
   }
 
   const lastKey = keys[keys.length - 1]!;
+
+  // Prevent prototype pollution on the last key
+  if (dangerousKeys.includes(lastKey)) {
+    throw new Error(
+      `Cannot set nested value: key "${lastKey}" is not allowed for security reasons`,
+    );
+  }
+
   current[lastKey] = value;
 }
 

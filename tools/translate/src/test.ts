@@ -65,7 +65,29 @@ async function runTests() {
     "Enregistrer",
     "Should create new nested object",
   );
-  console.log("✓ setNestedValue works correctly\n");
+
+  // Test prototype pollution prevention
+  try {
+    setNestedValue(targetObj, "__proto__.polluted", "bad");
+    assert.fail("Should have thrown error for __proto__");
+  } catch (error: any) {
+    assert.ok(
+      error.message.includes("not allowed for security reasons"),
+      "Should prevent __proto__ pollution",
+    );
+  }
+
+  try {
+    setNestedValue(targetObj, "constructor.polluted", "bad");
+    assert.fail("Should have thrown error for constructor");
+  } catch (error: any) {
+    assert.ok(
+      error.message.includes("not allowed for security reasons"),
+      "Should prevent constructor pollution",
+    );
+  }
+
+  console.log("✓ setNestedValue works correctly (with security checks)\n");
 
   // Test 4: Real file analysis
   console.log("Test 4: Real file analysis");
