@@ -1585,6 +1585,31 @@ importers:
         specifier: ^5.9
         version: 5.9.3
 
+  tools/translate:
+    dependencies:
+      '@karakeep/shared':
+        specifier: workspace:^
+        version: link:../../packages/shared
+      chalk:
+        specifier: ^5.3.0
+        version: 5.4.1
+      openai:
+        specifier: ^4.86.1
+        version: 4.104.0(encoding@0.1.13)(ws@8.18.3)(zod@3.24.2)
+      zod:
+        specifier: ^3.24.2
+        version: 3.24.2
+    devDependencies:
+      '@types/node':
+        specifier: ^24
+        version: 24.10.3
+      tsx:
+        specifier: ^4.8.1
+        version: 4.20.3
+      typescript:
+        specifier: ^5.9
+        version: 5.9.3
+
 packages:
 
   '@0no-co/graphql.web@1.1.2':
@@ -14388,10 +14413,12 @@ packages:
   tar@7.4.3:
     resolution: {integrity: sha512-5S7Va8hKfV7W5U6g3aYxXmlPoZVAwUMy9AOKyF2fVuZa2UD3qZjg578OrLRt8PcNN1PleVaL/5/yYATNL0ICUw==}
     engines: {node: '>=18'}
+    deprecated: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exhorbitant rates) by contacting i@izs.me
 
   tar@7.5.3:
     resolution: {integrity: sha512-ENg5JUHUm2rDD7IvKNFGzyElLXNjachNLp6RaGf4+JOgxXHkqA+gq81ZAMCUmtMtqBsoU62lcp6S27g1LCYGGQ==}
     engines: {node: '>=18'}
+    deprecated: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exhorbitant rates) by contacting i@izs.me
 
   tdigest@0.1.2:
     resolution: {integrity: sha512-+G0LLgjjo9BZX2MfdvPfH+MKLCrxlXSYec5DaPYP1fe6Iyhf0/fSmJ0bFiZ1F8BT6cGXl2LpltQptzjXKWEkKA==}
