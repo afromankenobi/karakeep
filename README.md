@@ -101,6 +101,20 @@ I'm a systems engineer in my day job (and have been for the past 7 years). I did
 
 Karakeep uses Weblate for managing translations. If you want to help translate Karakeep, you can do so [here](https://hosted.weblate.org/engage/hoarder/).
 
+### AI-Powered Translation Tool
+
+For developers and maintainers, we provide an AI-powered translation tool to automatically generate missing translations:
+
+```bash
+cd tools/translate
+cp .env.example .env
+# Add your OpenAI API key to .env
+pnpm install
+pnpm run
+```
+
+See [tools/translate/README.md](tools/translate/README.md) for more details.
+
 ## Karakeep Cloud ☁️
 
 If you're not comfortable with self-hosting, you can use our managed Karakeep cloud at [cloud.karakeep.app](https://cloud.karakeep.app). Cloud subscriptions support the development of Karakeep.
